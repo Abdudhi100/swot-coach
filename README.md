@@ -26,3 +26,34 @@ The app automatically generates daily, weekly, and long-term tasks to help users
 ```bash
 git clone https://github.com/your-username/swot-coach.git
 cd swot-coach
+
+```
+### 2. Backend setup
+```bash
+cd backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+### 3. Frontend setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+## 📧 Notifications
+
+Email only (no push or SMS for now).
+
+## 📌 Roadmap
+
+ - Daily/Weekly dashboards
+ - Task streak tracking
+ - Basic reporting & analytics
+ - Account recovery with email verification
+
+ Monetization (future)
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss.
