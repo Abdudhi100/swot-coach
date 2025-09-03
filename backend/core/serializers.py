@@ -12,7 +12,7 @@ class SignupSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    password = serializers.CharField()
+    password = serializers.CharField(write_only=True)
     def validate(self, attrs):
         user = authenticate(email=attrs["email"], password=attrs["password"])
         if not user:

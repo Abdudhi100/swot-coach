@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'core',
     'corsheaders',
+    "rest_framework.authtoken",   # optional for DRF token endpoints
+    "django_rest_passwordreset",
 ]
 
 MIDDLEWARE = [
@@ -156,3 +158,10 @@ CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
+
+# settings.py
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "no-reply@swotcoach.com"
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True 
