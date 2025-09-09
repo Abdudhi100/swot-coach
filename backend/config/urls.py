@@ -3,5 +3,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/auth/", include("core.urls")),  # include all auth endpoints from core.urls
+    path("api/", include("core.urls")),          # <- swot, tasks, streak
+    path("api/auth/", include("core.auth_urls")),  # <- authentication endpoints
 ]

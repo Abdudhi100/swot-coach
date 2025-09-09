@@ -1,11 +1,12 @@
 from django.urls import path, include
-from .views import SignupView, LoginView, logout_view, csrf_view, me_view
+from rest_framework.routers import DefaultRouter
+from .views import SWOTItemViewSet, TaskViewSet, streak_view
+
+router = DefaultRouter()
+router.register(r"swot", SWOTItemViewSet, basename="swot")
+router.register(r"tasks", TaskViewSet, basename="tasks")
 
 urlpatterns = [
-    path("signup/", SignupView.as_view()),          # POST /api/auth/signup/
-    path("login/", LoginView.as_view()),            # POST /api/auth/login/
-    path("logout/", logout_view),                   # POST /api/auth/logout/
-    path("csrf/", csrf_view),                       # GET /api/auth/csrf/
-    path("me/", me_view),                           # GET /api/auth/me/
-    path("password_reset/", include("django_rest_passwordreset.urls", namespace="password_reset")),
+    path("", include(router.urls)),          # /api/swot/, /api/tasks/
+    path("streak/", streak_view, name="streak"),  # /api/streak/
 ]
