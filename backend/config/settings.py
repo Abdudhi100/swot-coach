@@ -169,3 +169,4 @@ CSRF_COOKIE_HTTPONLY = False   # frontend JS (axios) needs access
 CSRF_COOKIE_SECURE = False     # set to True only in production with HTTPS
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
 CORS_ALLOW_CREDENTIALS = True
+# o+xk3cf8xve-k++)%6g@bxdcd12qhjn+)517gkv=0p%#avk+wh
