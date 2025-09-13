@@ -1,21 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
 import { api } from "@/lib/api";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner"; // switched to Sonner for better DX
+import { toast } from "sonner"; // using Sonner for better DX
 
-export default function PasswordResetConfirmPage() {
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+// 🔹 Extract the actual form into its own component
+function PasswordResetConfirmForm() {
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const token = searchParams.get("token"); // ?token=xyz
+  const token: string | null = searchParams.get("token"); // ?token=xyz
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     if (!token) {
@@ -33,7 +35,7 @@ export default function PasswordResetConfirmPage() {
       await api.post("/api/auth/password_reset/confirm/", { token, password });
       toast.success("Password updated successfully!");
       router.push("/login");
-    } catch (err) {
+    } catch (error: unknown) {
       toast.error("Failed to reset password. Please try again.");
     } finally {
       setLoading(false);
@@ -64,5 +66,14 @@ export default function PasswordResetConfirmPage() {
         </Button>
       </form>
     </div>
+  );
+}
+
+// 🔹 Wrap with Suspense to fix `useSearchParams` error
+export default function PasswordResetConfirmPage() {
+  return (
+    <Suspense fallback={<div className="p-6 text-center">Loading...</div>}>
+      <PasswordResetConfirmForm />
+    </Suspense>
   );
 }
